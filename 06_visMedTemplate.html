@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>06_visMedTemplate</title>
+    <style>
+      article {
+        border: 1px solid black;
+        padding: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="data_container"></section>
+    <template>
+      <article id="gris">
+        <h2></h2>
+        <img src="" alt="" />
+        <p id="type"></p>
+        <br />
+        <p id="levested"></p>
+        <img src="" alt="" />
+      </article>
+    </template>
+
+    <section id="liste"></section>
+    <script>
+      //   sætter objekter i array
+      let array = [
+        {
+          navn: "Gris",
+          type: "Pattedyr",
+          levested: "Grisefarm",
+          billede: "http://mabe-kea.dk/E19/pics/pig.png",
+        },
+        {
+          navn: "Frø",
+          type: "Amfibie",
+          levested: "Frøfarm",
+          billede: "http://mabe-kea.dk/E19/pics/frog.png",
+        },
+        {
+          navn: "Ræv",
+          type: "Pattedyr",
+          levested: "Rævefarm",
+          billede: "http://mabe-kea.dk/E19/pics/fox.png",
+        },
+        {
+          navn: "Sild",
+          type: "Fisk",
+          levested: "Sildefarm",
+          billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+        },
+        {
+          navn: "Krokodille",
+          type: "Krybdyr",
+          levested: "Krokodillefarm",
+          billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+        },
+      ];
+
+      console.log(array);
+
+      // vis dyrene i DOM
+
+      // tester om DOM'en er loadet
+      document.addEventListener("DOMContentLoaded", start);
+
+      function start() {
+        console.log("start");
+
+        const container = document.querySelector(".data_container");
+        const dyreTemplate = document.querySelector("template");
+
+        // løber dyrelisten igennem og indsætter data i en template
+        array.forEach((array) => {
+          // placer personen i HTML
+          let klon = dyreTemplate.cloneNode(true).content;
+          klon.querySelector("h2").textContent = array.navn;
+          klon.querySelector("img").src = array.billede;
+          klon.querySelector("#type").textContent = `Type: ${array.type}`;
+          klon.querySelector(
+            "#levested"
+          ).textContent = `Levested: ${array.levested}`;
+          // kloner containeren
+          container.appendChild(klon);
+        });
+      }
+    </script>
+  </body>
+</html>
