@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <article id="gris">
+      <p></p>
+      <img src="" alt="" />
+    </article>
+
+    <section id="liste"></section>
+    <script>
+      let dyr = {
+        navn: "gris",
+        type: "pattedyr",
+        billede: "http://mabe-kea.dk/E19/pics/pig.png",
+        levested: "svinefarme",
+      };
+
+      console.log(
+        `navn: ${dyr.navn} type: ${dyr.type} billede: ${dyr.billede} levested: ${dyr.levested}`
+      );
+
+      //   sætter objekter ind i DOM'en
+      const destination = document.querySelector("#gris");
+
+      const grisen = `Navn: ${dyr.navn} Type: ${dyr.type} Levested: ${dyr.levested}`;
+
+      destination.querySelector("p").textContent = grisen;
+      destination.querySelector("img").src = dyr.billede;
+
+      //   sætter objekter i array
+      let array = [
+        {
+          navn: "gris",
+          type: "pattedyr",
+          levested: "grisefarm",
+          billede: "http://mabe-kea.dk/E19/pics/pig.png",
+        },
+        {
+          navn: "frø",
+          type: "amfibie",
+          levested: "frøfarm",
+          billede: "http://mabe-kea.dk/E19/pics/frog.png",
+        },
+        {
+          navn: "ræv",
+          type: "pattedyr",
+          levested: "rævefarm",
+          billede: "http://mabe-kea.dk/E19/pics/fox.png",
+        },
+        {
+          navn: "sild",
+          type: "fisk",
+          levested: "sildefarm",
+          billede: "http://mabe-kea.dk/E19/pics/sild.jpg",
+        },
+        {
+          navn: "krokodille",
+          type: "krybdyr",
+          levested: "krokodillefarm",
+          billede: "http://mabe-kea.dk/E19/pics/kroko.jpg",
+        },
+      ];
+
+      console.log(array);
+
+      // vis dyrene i DOM
+
+      // tester om DOM'en er loadet
+      document.addEventListener("DOMContentLoaded", start);
+
+      function start() {
+        console.log("start");
+
+        const listevisning = document.querySelector("#liste");
+        // løb dyrelisten igennem og indsæt i #liste i DOM'en
+        array.forEach((array) => {
+          // placer dyrene i html
+          listevisning.innerHTML += `<p>${array.navn}, ${array.type}, ${array.levested}</p>`;
+        });
+      }
+    </script>
+  </body>
+</html>
