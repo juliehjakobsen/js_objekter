@@ -27,10 +27,6 @@
 
     <section id="liste"></section>
     <script>
-      //   sætter objekter i array
-
-      console.log(array);
-
       // vis dyrene i DOM
 
       // tester om DOM'en er loadet
@@ -42,19 +38,34 @@
         const container = document.querySelector(".data_container");
         const dyreTemplate = document.querySelector("template");
 
-        // løber dyrelisten igennem og indsætter data i en template
-        array.forEach((array) => {
-          // placer personen i HTML
-          let klon = dyreTemplate.cloneNode(true).content;
-          klon.querySelector("h2").textContent = array.navn;
-          klon.querySelector("img").src = array.billede;
-          klon.querySelector("#type").textContent = `Type: ${array.type}`;
-          klon.querySelector(
-            "#levested"
-          ).textContent = `Levested: ${array.levested}`;
-          // kloner containeren
-          container.appendChild(klon);
-        });
+        // henter data fra json-fil via "fetch"
+        const fil = "alleDyr.json";
+
+        async function hentdata(fil) {
+          const result = await fetch(fil);
+          const json = await result.json();
+          vis(json);
+        }
+
+        function vis(alleDyr) {
+          console.log(alleDyr);
+
+          // løber dyrelisten igennem og indsætter data i en template
+          alleDyr.forEach((alleDyr) => {
+            // placer personen i HTML
+            let klon = dyreTemplate.cloneNode(true).content;
+            klon.querySelector("h2").textContent = alleDyr.navn;
+            klon.querySelector("img").src = alleDyr.billede;
+            klon.querySelector("#type").textContent = `Type: ${alleDyr.type}`;
+            klon.querySelector(
+              "#levested"
+            ).textContent = `Levested: ${alleDyr.levested}`;
+            // kloner containeren
+            container.appendChild(klon);
+          });
+        }
+
+        hentdata(fil);
       }
     </script>
   </body>

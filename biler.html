@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <section class="data_biler"></section>
+    <template>
+      <article class="bilerne">
+        <h3></h3>
+        <p class="model"></p>
+        <p class="motor"></p>
+        <p class="km"></p>
+        <p class="udstyr"></p>
+      </article>
+    </template>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", start);
+
+      function start() {
+        const fil = "biler.json";
+        async function hentdata(fil) {
+          const result = await fetch(fil);
+          const json = await result.json();
+          vis(json);
+        }
+
+        function vis(json) {
+          console.log(json);
+        }
+
+        hentdata(fil);
+
+        function vis(biler) {
+          const data = document.querySelector(".data_biler");
+          const bilerTemplate = document.querySelector("template");
+
+          // løber billisten igennem og indsætter data i en template
+          biler.forEach((biler) => {
+            // placer bilerne i HTML
+            let klon = bilerTemplate.cloneNode(true).content;
+            klon.querySelector("h3").textContent = biler.mærke;
+            klon.querySelector(".model").textContent = biler.model;
+            klon.querySelector(".motor").textContent = biler.motor;
+            klon.querySelector(".km").textContent = biler.km;
+            klon.querySelector(".udstyr").textContent = biler.udstyr;
+            // kloner containeren
+            data.appendChild(klon);
+          });
+        }
+      }
+    </script>
+  </body>
+</html>
