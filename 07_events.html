@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>07_events</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@300&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        margin: 3px;
+      }
+
+      h1 {
+        font-size: 3rem;
+        font-family: "Roboto", sans-serif;
+      }
+
+      h3 {
+        font-family: "Roboto", sans-serif;
+      }
+
+      img {
+        width: 100%;
+        display: block;
+        background-color: rgba(255, 0, 0, 0.5);
+      }
+
+      p {
+        padding-bottom: 30px;
+        font-family: "Roboto", sans-serif;
+      }
+
+      section {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      }
+    </style>
+  </head>
+  <body>
+    <h1>H</h1>
+    <section class="data_container"></section>
+    <template>
+      <article id="film">
+        <img src="" alt="" />
+        <h3></h3>
+        <p id="info"></p>
+      </article>
+    </template>
+
+    <section id="liste"></section>
+    <script>
+      //   sætter objekter i array
+      let array = [
+        {
+          titel: "A Calling",
+          billede:
+            "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/W6dOqabNhHKBPXxxKKEZRA84-720.jpg",
+          info: "Christian Bengston | Danmark | 20 min | 2019",
+        },
+        {
+          titel: "A Hole In My Heart",
+          billede:
+            "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Q8K1pZrOs03Q0IrDkBwGVu5r-720.jpg",
+          info: "Mees Peijnenberg | Holland | 9 min | 2015",
+        },
+        {
+          titel: "A Place In The Sun - 110 years after the genocide",
+          billede:
+            "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/hUd4SdGQ8I23ovxWnGtBz4Ck-720.jpg",
+          info: "Christian Zipfel | Tyskland | 20 min | 2018",
+        },
+        {
+          titel: "A Tower of Two",
+          billede:
+            "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/Zdt2ODEqSVOkNe8nUaSSu8kd.jpg",
+          info: "Jacob Krzystof Glogowski | Danmark | 21 min | 2019",
+        },
+        {
+          titel: "A Woman Without Children",
+          billede:
+            "https://odense-film-festival.s3.eu-central-1.amazonaws.com/media/HRZBn8KLPmvVNvoJ4e8CzUVU-720.jpg",
+          info: "Cecilie Kronborg Thomsen | Danmark | 20 min | 2021",
+        },
+      ];
+
+      console.log(array);
+
+      // vis dyrene i DOM
+
+      // tester om DOM'en er loadet
+      document.addEventListener("DOMContentLoaded", start);
+
+      function start() {
+        console.log("start");
+
+        const container = document.querySelector(".data_container");
+        const dyreTemplate = document.querySelector("template");
+
+        // løber dyrelisten igennem og indsætter data i en template
+        array.forEach((array) => {
+          // placer personen i HTML
+          let klon = dyreTemplate.cloneNode(true).content;
+          klon.querySelector("h3").textContent = array.titel;
+          klon.querySelector("img").src = array.billede;
+          klon.querySelector("#info").textContent = array.info;
+          // kloner containeren
+          container.appendChild(klon);
+        });
+      }
+    </script>
+  </body>
+</html>
